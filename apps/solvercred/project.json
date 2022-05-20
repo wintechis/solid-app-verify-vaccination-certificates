@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/solvercred",
         "index": "apps/solvercred/src/index.html",
@@ -17,7 +19,9 @@
           "apps/solvercred/src/favicon.ico",
           "apps/solvercred/src/assets"
         ],
-        "styles": ["apps/solvercred/src/styles.scss"],
+        "styles": [
+          "apps/solvercred/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -82,7 +86,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/solvercred"],
+      "outputs": [
+        "coverage/apps/solvercred"
+      ],
       "options": {
         "jestConfig": "apps/solvercred/jest.config.ts",
         "passWithNoTests": true
