@@ -20,6 +20,9 @@
     "paths": {
       "@solid-app-verifiable-credentials/auth": [
         "libs/auth/src/index.ts"
+      ],
+      "@solid-app-verifiable-credentials/user-data": [
+        "libs/user-data/src/index.ts"
       ]
     }
   },

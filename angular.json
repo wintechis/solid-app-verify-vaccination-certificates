@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "auth": "libs/auth",
-    "solvercred": "apps/solvercred"
+    "solvercred": "apps/solvercred",
+    "user-data": "libs/user-data"
   }
 }
