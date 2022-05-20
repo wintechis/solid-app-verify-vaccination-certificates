@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@nrwl/angular": "14.1.7",
+    "@inrupt/solid-client": "^1.23.0",
+    "@inrupt/solid-client-authn-browser": "^1.11.8",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
