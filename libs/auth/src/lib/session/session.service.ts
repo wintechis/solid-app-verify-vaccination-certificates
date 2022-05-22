@@ -10,7 +10,9 @@ export class SessionService {
   constructor() {}
 
   async handleLoginRedirect() {
-    await this.session.handleIncomingRedirect(window.location.href);
+    await this.session.handleIncomingRedirect({
+      restorePreviousSession: true,
+    });
   }
 
   get isLoggedIn(): boolean {
