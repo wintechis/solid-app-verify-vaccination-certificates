@@ -1,0 +1,10 @@
+<div class="row">
+    <label id="labelIDPURL" for="txtIDPURL"
+    >Identity Provider URL
+        <input type="text" [(ngModel)]="idpURL" id="txtIDPURL">
+    </label>
+    <br>
+    <br>
+    <button name="btnLogin" id="btnLogin" (click)="login()" >Login</button>
+    <p id="labelStatus" class="labelStatus"></p>
+</div>
