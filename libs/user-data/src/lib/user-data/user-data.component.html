@@ -1,1 +1,23 @@
-<span>This is your WebID: {{webId | async}}</span>
+<span>This is your WebID: {{webId}}</span>
+
+<table class="table-auto">
+    <thead>
+    <tr>
+        <th>vaccine</th>
+        <th>type</th>
+        <th>manufacturer</th>
+        <th>numberOfVaccination</th>
+        <th>dateOfVaccination</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vaccine of vaccinations">
+        <td>{{vaccine.numberOfVaccination}}</td>
+        <td>{{vaccine.dateOfVaccination}}</td>
+        <td>{{vaccine.vaccine}}</td>
+        <td>{{vaccine.manufacturer}}</td>
+        <td>{{vaccine.type}}</td>
+    </tr>
+    </tbody>
+</table>
+<button (click)="doIT()">Click Me!</button>

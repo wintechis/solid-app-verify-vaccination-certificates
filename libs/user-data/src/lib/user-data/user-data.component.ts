@@ -7,9 +7,14 @@ import { UserDataService } from "../user-data.service";
   styleUrls: ["./user-data.component.scss"],
 })
 export class UserDataComponent implements OnInit {
-  webId? = this.userDataService.getWebId();
+  webId? = this.userDataService.webId;
+  vaccinations = this.userDataService.vaccinationDocuments;
 
   constructor(private userDataService: UserDataService) {}
 
   ngOnInit(): void {}
+
+  doIT() {
+    this.userDataService.storeVaccinationDocument();
+  }
 }

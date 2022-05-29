@@ -18,7 +18,8 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
-    await this.sessionService.handleLoginRedirect();
+    const info = await this.sessionService.handleLoginRedirect();
+    if (info?.isLoggedIn) return true;
 
     if (this.sessionService.isLoggedIn) return true;
 
