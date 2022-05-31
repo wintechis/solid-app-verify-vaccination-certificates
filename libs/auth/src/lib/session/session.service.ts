@@ -1,6 +1,10 @@
 import { Injectable } from "@angular/core";
 import { ISessionInfo, Session } from "@inrupt/solid-client-authn-browser";
-import { getSolidDataset, SolidDataset } from "@inrupt/solid-client";
+import {
+  getSolidDataset,
+  saveSolidDatasetAt,
+  SolidDataset,
+} from "@inrupt/solid-client";
 
 @Injectable({
   providedIn: "root",
@@ -26,5 +30,11 @@ export class SessionService {
 
   getDataSet(url: string): Promise<SolidDataset> {
     return getSolidDataset(url, { fetch: this._session.fetch });
+  }
+
+  saveDataSet(url: string, dataSet: SolidDataset) {
+    return saveSolidDatasetAt(url, dataSet, {
+      fetch: this.session.fetch,
+    });
   }
 }
