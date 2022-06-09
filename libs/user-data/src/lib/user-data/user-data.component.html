@@ -1,1 +1,64 @@
-<span>This is your WebID: {{webId | async}}</span>
+<span>This is your WebID: {{webId}}</span>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>vaccine</th>
+        <th>type</th>
+        <th>manufacturer</th>
+        <th>numberOfVaccination</th>
+        <th>dateOfVaccination</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vaccination of vaccinations | keyvalue">
+        <td>{{vaccination.value.vaccine}}</td>
+        <td>{{vaccination.value.type}}</td>
+        <td>{{vaccination.value.manufacturer}}</td>
+        <td>{{vaccination.value.numberOfVaccination}}</td>
+        <td>{{vaccination.value.dateOfVaccination | date : 'dd-MM-yyyy'}}</td>
+        <td><button class="btn btn-danger" (click)="deleteVaccination(vaccination.key)">Löschen</button> </td>
+    </tr>
+    </tbody>
+</table>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFormModal">Hinzufügen</button>
+
+<div class="modal fade" id="addFormModal" tabindex="-1" aria-labelledby="addFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addFormModalLabel">Vaccination hinzufügen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="vaccine-name" class="col-form-label">Vaccine:</label>
+                        <input type="text" class="form-control" id="vaccine-name" [(ngModel)]="vaccinationName" name="vaccine-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="vaccine-type" class="col-form-label">Type:</label>
+                        <input type="text" class="form-control" id="vaccine-type" [(ngModel)]="vaccinationType" name="vaccine-type">
+                    </div>
+                    <div class="mb-3">
+                        <label for="manufacturer" class="col-form-label">Manufacturer:</label>
+                        <input type="text" class="form-control" id="manufacturer" [(ngModel)]="manufacturer" name="manufacturer">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numberOfVaccination" class="col-form-label">Number Of Vaccination:</label>
+                        <input type="number" class="form-control" id="numberOfVaccination" [(ngModel)]="numberOfVaccination" name="number-of-vaccination">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateOfVaccination" class="col-form-label">Date Of Vaccination:</label>
+                        <input type="date" class="form-control" id="dateOfVaccination" [(ngModel)]="dateOfVaccination" name="date-of-vaccination">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="saveNewVaccination()" data-bs-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
