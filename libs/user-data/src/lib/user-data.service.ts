@@ -6,12 +6,16 @@ import {
   removeThing,
   setThing,
   Thing,
+  universalAccess,
 } from "@inrupt/solid-client";
 import {
-  Nullable,
-  VaccinationDocument,
-  VaccinationDocumentThingFactory,
-} from "./vaccination-document";
+  Vaccination,
+  VaccinationDeserializer,
+  VaccinationSerializer,
+} from "./vaccination.rdf";
+import { LazyThing } from "@solid-app-verifiable-credentials/solid";
+import { PersonDeserializer } from "./person.rdf";
+import { VaccineDeserializer } from "./vaccine.rdf";
 
 @Injectable({
   providedIn: "root",
@@ -24,9 +28,7 @@ export class UserDataService {
   }
 
   async storeVaccinationDocument(
-    vaccinationName: string,
-    vaccinationType: string,
-    manufacturer: string,
+    vaccinationUrl: string,
     numberOfVaccination: number,
     dateOfVaccination: string
   ) {
@@ -41,12 +43,11 @@ export class UserDataService {
         throw reason;
       });
 
-    const newThing = VaccinationDocumentThingFactory.fromVaccinationDocument({
-      vaccine: vaccinationName,
-      type: vaccinationType,
-      manufacturer: manufacturer,
+    const newThing = new VaccinationSerializer().serialize({
+      vaccine: new LazyThing(vaccinationUrl, VaccineDeserializer),
       numberOfVaccination: numberOfVaccination,
       dateOfVaccination: new Date(dateOfVaccination),
+      vaccinatedPerson: new LazyThing(this.webId!, PersonDeserializer),
     });
 
     ds = setThing(ds, newThing);
@@ -54,21 +55,12 @@ export class UserDataService {
   }
 
   private getVaccinationThingUrl() {
-    const session = this.sessionService.session;
-    if (session.info.webId == undefined)
-      throw new Error("webId is empty - please refresh the page and login");
-
-    const url = new URL(session.info.webId);
-    url.hash = "";
-    url.pathname = url.pathname.substring(0, url.pathname.lastIndexOf("/")); // Walk path up
-    url.pathname = url.pathname.substring(0, url.pathname.lastIndexOf("/")); // Walk path up
-    url.pathname += "/vaccinations";
+    const url = this.sessionService.storageRootUrl;
+    url.pathname += "vaccinations";
     return url;
   }
 
-  async getVaccinationDocuments(): Promise<
-    Map<string, Nullable<VaccinationDocument>>
-  > {
+  async getVaccinationDocuments(): Promise<Map<string, Vaccination>> {
     const solidDataset = await this.sessionService
       .getDataSet(this.getVaccinationThingUrl().toString())
       .catch((reason) => {
@@ -80,17 +72,19 @@ export class UserDataService {
 
     const things: Thing[] = getThingAll(solidDataset);
 
-    return things.reduce((map, thing) => {
-      const vaccination = VaccinationDocumentThingFactory.fromThing(thing);
-      if (vaccination.vaccine && vaccination.type) {
+    const serializer = new VaccinationDeserializer();
+
+    return things
+      .filter((thing) => serializer.checkType(thing))
+      .reduce((map, thing) => {
+        const vaccination = serializer.deserialize(thing);
         map.set(thing.url, vaccination);
-      }
-      return map;
-    }, new Map<string, Nullable<VaccinationDocument>>());
+        return map;
+      }, new Map<string, Vaccination>());
   }
 
   async deleteVaccination(vaccinationUrl: string) {
-    var ds = await this.sessionService.getDataSet(
+    let ds = await this.sessionService.getDataSet(
       this.getVaccinationThingUrl().toString()
     );
 

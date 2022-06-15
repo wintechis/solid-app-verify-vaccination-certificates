@@ -1,0 +1,97 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor RKI
+actor Alice
+actor Shop
+
+autonumber
+/'
+title: Option 1 - Proof Resource in Inbox
+
+Alice -> Shop: Wants access to
+Shop -> Alice: Asks for 3G proof
+
+== RKI verification ==
+
+Alice -> RKI: Requests a proof
+RKI -> Alice: Requests vaccinations
+Alice --> RKI: Vaccination Data
+RKI --> Alice: Puts proof resource into Inbox
+Alice -> Alice: Puts proof resource into profile and permit read to Shop
+
+== Proof verification ==
+Alice -> Shop: Wants access to
+Shop -> Alice: Requests proof resource
+Alice --> Shop
+
+Shop -> RKI: Request public key to verify signature
+RKI --> Shop
+
+Shop --> Alice: Grant access
+
+note across
++ "Easy" to implement
++ Alice owns her proof
+
+- 2 attempts necessary
+- manual work from Alice in her pod necessary
+- no real-time verification of the certificates
+end note
+
+newpage
+
+title: Option 2 - Request Flow
+
+Alice -> Shop: Wants access to
+Shop -> RKI: Ask for proof for Alice's WebId
+RKI -> Alice: Ask for vaccination certificates
+Alice --> RKI
+RKI --> Shop
+Shop --> Alice: Grant access
+
+note across
++ Always up to date information and grants
++ Only one request flow
+
+- "Hard" to implement as dynamically rendered resources are not standard in SOLID
+- How can Alice tell the RKI who can access her proof? (It is possible, but an interface is needed)
+end note
+
+
+
+newpage
+'/
+
+Alice -> RKI: Put Proof Request with links to vaccinations or webid in inbox
+RKI -> RKI: Work on requests in inbox regularly
+RKI -> Alice: Request Vaccinations
+Alice --> RKI
+RKI -> RKI: Generate proof and store it locally & allow Alice read & access control access
+RKI -> Alice: Place link to proof in inbox
+Alice -> Shop: Wants access to
+Shop -> Alice: Look for link to proof in profile
+note over Alice
+Maybe storing the url at RKI in the profile is not good, as everyone has access.
+In a separate resource would be better.
+So one link to a "local" resource that holds a link to the resource at RKI.
+end note
+
+Alice --> Shop: card#vaccinationProof
+Shop -> Alice: proofs/covid-vaccination
+Alice --> Shop: contains link to RKI resource
+Shop -> RKI: proof resource from Alice
+RKI --> Shop
+Shop -> Alice: Grant Access
+
+
+note across
++ One-Time generation upfront
++ Verification of proof is easy as it lives at RKI
+
+- Many requests necessary to protect and maintain access rights
+- Data Privacy is questionable if there must be a "convenience" entry in the public profile
+end note
+
+
+@enduml

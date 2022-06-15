@@ -1,0 +1,20 @@
+@prefix as: <https://www.w3.org/ns/activitystreams#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix acl: <http://www.w3.org/ns/auth/acl#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix acp: <http://www.w3.org/ns/solid/acp#> .
+
+<https://pod.inrupt.com/wiesnery/public/vaccines.ttl>
+        rdf:type  ldp:RDFSource .
+
+<https://pod.inrupt.com/wiesnery/public/vaccines.ttl#biontech-comirnaty>
+        <http://solvercred.org/vaccine#manufacturer>  "Biontech Manufacturing GmbH" ;
+        <http://solvercred.org/vaccine#type>  "SARS-CoV-2 mRNA vaccine" ;
+        <http://solvercred.org/vaccine#name>  "Comirnaty" ;
+        rdf:type  <http://solvercred.org/vaccine> .

@@ -3,10 +3,18 @@ import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
+import { NgxsModule } from "@ngxs/store";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    NgxsModule.forRoot([], {
+      developmentMode: !environment.production,
+    }),
+    AppRoutingModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

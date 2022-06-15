@@ -21,6 +21,12 @@
       "@solid-app-verifiable-credentials/auth": [
         "libs/auth/src/index.ts"
       ],
+      "@solid-app-verifiable-credentials/authorization": [
+        "libs/authorization/src/index.ts"
+      ],
+      "@solid-app-verifiable-credentials/solid": [
+        "libs/solid/src/index.ts"
+      ],
       "@solid-app-verifiable-credentials/user-data": [
         "libs/user-data/src/index.ts"
       ]
