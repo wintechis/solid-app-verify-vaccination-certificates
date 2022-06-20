@@ -1,13 +1,12 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/user-data/src",
   "prefix": "solid-app-verifiable-credentials",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/user-data"
-      ],
+      "outputs": ["coverage/libs/user-data"],
       "options": {
         "jestConfig": "libs/user-data/jest.config.ts",
         "passWithNoTests": true
