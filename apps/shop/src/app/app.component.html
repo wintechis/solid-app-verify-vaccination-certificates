@@ -1,0 +1,6 @@
+<h1>Shop Application</h1>
+<button *ngIf="(proofUri | async) == null" (click)="redirect()">
+  Legitimation starten
+</button>
+<p *ngIf="(proofUri | async) != null">proofUri: {{ proofUri | async }}</p>
+<router-outlet></router-outlet>

@@ -5,6 +5,7 @@
     "auth": "libs/auth",
     "authorization": "libs/authorization",
     "rki": "apps/rki",
+    "shop": "apps/shop",
     "solid": "libs/solid",
     "solvercred": "apps/solvercred",
     "user-data": "libs/user-data"

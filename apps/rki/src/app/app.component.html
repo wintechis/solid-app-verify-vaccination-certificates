@@ -1,2 +1,7 @@
 <h1>RKI Application</h1>
+
+<p>webid: {{ (queryParamMap$ | async)?.get("webId") }}</p>
+<p>redirectUri: {{ (queryParamMap$ | async)?.get("redirectUri") }}</p>
+
+<button (click)="redirectBack()">Legitimation abschließen</button>
 <router-outlet></router-outlet>
