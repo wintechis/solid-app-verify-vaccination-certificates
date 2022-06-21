@@ -10,30 +10,20 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@solid-app-verifiable-credentials/auth": [
-        "libs/auth/src/index.ts"
-      ],
+      "@solid-app-verifiable-credentials/auth": ["libs/auth/src/index.ts"],
       "@solid-app-verifiable-credentials/authorization": [
         "libs/authorization/src/index.ts"
       ],
-      "@solid-app-verifiable-credentials/solid": [
-        "libs/solid/src/index.ts"
-      ],
+      "@solid-app-verifiable-credentials/solid": ["libs/solid/src/index.ts"],
       "@solid-app-verifiable-credentials/user-data": [
         "libs/user-data/src/index.ts"
       ]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

@@ -6,7 +6,7 @@ actor Alice
 actor Shop
 
 autonumber
-/'
+
 title: Option 1 - Proof Resource in Inbox
 
 Alice -> Shop: Wants access to
@@ -61,7 +61,7 @@ end note
 
 
 newpage
-'/
+
 
 Alice -> RKI: Put Proof Request with links to vaccinations or webid in inbox
 RKI -> RKI: Work on requests in inbox regularly
