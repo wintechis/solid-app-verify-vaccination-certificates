@@ -44,17 +44,20 @@ export class SessionService {
   }
 
   getDataSet(url: string): Promise<SolidDataset> {
+    // @ts-ignore
     return getSolidDataset(url, { fetch: this._session.fetch });
   }
 
   saveDataSet(url: string, dataSet: SolidDataset) {
     return saveSolidDatasetAt(url, dataSet, {
+      // @ts-ignore
       fetch: this._session.fetch,
     });
   }
 
   getAgentAccessAll(url: string) {
     return universalAccess.getAgentAccessAll(url, {
+      // @ts-ignore
       fetch: this._session.fetch,
     });
   }
@@ -65,6 +68,7 @@ export class SessionService {
     access: Partial<AccessModes>
   ) {
     return universalAccess.setAgentAccess(ressource, webId, access, {
+      // @ts-ignore
       fetch: this._session.fetch,
     });
   }
