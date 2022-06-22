@@ -39,15 +39,23 @@ note across
 - no real-time verification of the certificates
 end note
 
-newpage
+newpage Option 2 - Request Flow
 
-title: Option 2 - Request Flow
+autonumber
 
 Alice -> Shop: Wants access to
-Shop -> RKI: Ask for proof for Alice's WebId
+Shop -> RKI: Ask for proof for Alice's WebId (parameters: webId of the shop, redirectUri)
 RKI -> Alice: Ask for vaccination certificates
-Alice --> RKI
-RKI --> Shop
+alt access already granted
+    Alice --> RKI: read vaccination certificates
+else No access granted
+    RKI -> Alice: grant RKI access (done within RKI app, or with redirect to personal app)
+    Alice --> RKI: read vaccination certificates
+end
+
+RKI -> RKI: Generate proof
+
+RKI --> Shop: redirect back to shop with proof URI in query param
 Shop --> Alice: Grant access
 
 note across
@@ -60,8 +68,9 @@ end note
 
 
 
-newpage
+newpage Option 3
 
+autonumber
 
 Alice -> RKI: Put Proof Request with links to vaccinations or webid in inbox
 RKI -> RKI: Work on requests in inbox regularly
