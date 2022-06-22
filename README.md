@@ -109,7 +109,7 @@ We came up with three options, which you can see below with their corresponding 
 
 ![image](./GrantFlow-option3.png)
 
-After evaluation of all three options we decided for option 2, which is most convenient for the user. And solves the
+After evaluation of all three options we decided for option 2, which is most convenient for the user and solves the
 problem of authenticity of the proof in a simple way, as the proof is stored at the RKI's pod at a trusted domain.
 The option contains several key elements:
 
@@ -118,7 +118,7 @@ The option contains several key elements:
 The user does not leave a directed flow, which leads towards his goal: access to the Shop.
 The user is redirected to the next required step and if the step succeeds, he is redirected back to the original
 application (Shop).
-These redirects communicated through query params. After being redirected back to the shop, the redirect uri also
+These redirects are communicated through query params. After being redirected back to the shop, the redirect uri also
 contains the URi of the proof as a request param.
 
 #### Authenticity of the Proof
@@ -133,7 +133,7 @@ authenticity of the proof.
 #### Renewal of Information
 
 Due to the easy user flow, the proof certificate can have a lifetime of only a few hours / days and can easily be
-regenerated without and effort for the user (Alice). This allows for fast revocation of certificates in case of fraud or
+regenerated without any effort for the user (Alice). This allows for fast revocation of certificates in case of fraud or
 changing legal conditions.
 
 #### IMPORTANT ASSUMPTION
