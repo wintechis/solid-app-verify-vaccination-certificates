@@ -13,8 +13,8 @@
   <tbody>
     <tr *ngFor="let vaccination of vaccinations$ | async">
       <td>{{ vaccination.numberOfVaccination }}</td>
-      <td>{{ (vaccines$ | async )?.get(vaccination.vaccine)?.type }}</td>
-      <td>{{ (vaccines$ | async )?.get(vaccination.vaccine)?.manufacturer }}</td>
+      <td>{{ (vaccines$ | async)?.get(vaccination.vaccine)?.type }}</td>
+      <td>{{ (vaccines$ | async)?.get(vaccination.vaccine)?.manufacturer }}</td>
       <td>{{ vaccination.dateOfVaccination | date: "dd-MM-yyyy" }}</td>
       <td>
         <button
@@ -65,7 +65,12 @@
               [(ngModel)]="vaccine"
               name="vaccine-name"
             >
-              <option value="https://pod.inrupt.com/wiesnery/public/vaccines.ttl#biontech-comirnaty" selected>Biontech - Comirnaty</option>
+              <option
+                value="https://pod.inrupt.com/wiesnery/public/vaccines.ttl#biontech-comirnaty"
+                selected
+              >
+                Biontech - Comirnaty
+              </option>
             </select>
           </div>
           <div class="mb-3">
@@ -98,9 +103,17 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary" (click)="saveNewVaccination()" data-bs-dismiss="modal">Save</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveNewVaccination()"
+          data-bs-dismiss="modal"
+        >
+          Save
+        </button>
       </div>
     </div>
   </div>
 </div>
 <solid-app-verifiable-credentials-authorization></solid-app-verifiable-credentials-authorization>
+<router-outlet></router-outlet>

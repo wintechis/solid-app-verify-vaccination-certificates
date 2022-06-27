@@ -19,6 +19,7 @@ export class SessionService {
   handleLoginRedirect(): Promise<ISessionInfo | undefined> {
     return this.session.handleIncomingRedirect({
       restorePreviousSession: true,
+      url: window.location.href,
     });
   }
 

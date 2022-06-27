@@ -13,7 +13,7 @@ export class LoginService {
     await new Session().login({
       oidcIssuer,
       clientName: this.APP_CLIENT_NAME,
-      redirectUrl: window.location.origin,
+      redirectUrl: window.location.href,
     });
   }
 }

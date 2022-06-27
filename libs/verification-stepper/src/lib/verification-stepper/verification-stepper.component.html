@@ -1,13 +1,7 @@
 <mat-vertical-stepper linear>
-  <mat-step [completed]="false">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Freigabe der Impfzertifikate</ng-template>
-      <p>
-        Damit wir einen Nachweis über Ihren Impfstatus generieren können,
-        benötigen wir, das RKI, Zugriff auf Ihre Impfzertifikate.
-      </p>
-      <button mat-raised-button color="primary">Zugriff gewähren</button>
-    </form>
+  <mat-step [completed]="false" editable="false">
+    <ng-template matStepLabel>Freigabe der Impfzertifikate</ng-template>
+    <solid-app-verifiable-credentials-request-access-component></solid-app-verifiable-credentials-request-access-component>
   </mat-step>
   <mat-step>
     <form [formGroup]="secondFormGroup">

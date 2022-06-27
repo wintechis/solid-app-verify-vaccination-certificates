@@ -7,9 +7,23 @@ import { NgxsModule } from "@ngxs/store";
 import { VaccinationState } from "./state/vaccination.state";
 import { VaccineState } from "./state/vaccine.state";
 import { AuthorizationModule } from "@solid-app-verifiable-credentials/authorization";
+import { GrantAccessComponent } from "./grant-access/grant-access.component";
+import { GrantAccessStorer } from "./grant-access-storer.service";
+import { GrantAccessLoader } from "./grant-access-loader.service";
 
 export const userDataRoutes: Route[] = [
-  { path: "", component: UserDataComponent },
+  {
+    path: "",
+    component: UserDataComponent,
+    resolve: { resolve: GrantAccessStorer },
+    children: [
+      {
+        path: "requestAccess",
+        component: GrantAccessComponent,
+        resolve: { grantAccessData: GrantAccessLoader },
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -20,6 +34,6 @@ export const userDataRoutes: Route[] = [
     NgxsModule.forFeature([VaccinationState, VaccineState]),
     AuthorizationModule,
   ],
-  declarations: [UserDataComponent],
+  declarations: [UserDataComponent, GrantAccessComponent],
 })
 export class UserDataModule {}

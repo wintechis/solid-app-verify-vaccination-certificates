@@ -7,7 +7,6 @@ import { FormBuilder } from "@angular/forms";
   styleUrls: ["./verification-stepper.component.scss"],
 })
 export class VerificationStepperComponent implements OnInit {
-  firstFormGroup = this.formBuilder.group({ firstName: "", lastName: "" });
   secondFormGroup = this.formBuilder.group({ phoneNumber: "", email: "" });
 
   constructor(private formBuilder: FormBuilder) {}

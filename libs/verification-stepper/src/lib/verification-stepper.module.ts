@@ -5,6 +5,7 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
+import { RequestAccessComponentComponent } from "./verification-stepper/request-access-component/request-access-component.component";
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { MatButtonModule } from "@angular/material/button";
     MatInputModule,
     MatButtonModule,
   ],
-  declarations: [VerificationStepperComponent],
+  declarations: [VerificationStepperComponent, RequestAccessComponentComponent],
   exports: [VerificationStepperComponent],
 })
 export class VerificationStepperModule {}
