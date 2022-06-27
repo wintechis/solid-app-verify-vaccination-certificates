@@ -14,7 +14,10 @@
         "tsConfig": "apps/rki/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/rki/src/favicon.ico", "apps/rki/src/assets"],
-        "styles": ["apps/rki/src/styles.scss"],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/rki/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {

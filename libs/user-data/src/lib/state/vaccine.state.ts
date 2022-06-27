@@ -4,7 +4,6 @@ import { LoadVaccine } from "./vaccine.actions";
 import { VaccineModel, VaccineStateModel } from "./vaccine.state-model";
 import { LazyThing } from "@solid-app-verifiable-credentials/solid";
 import { VaccineDeserializer } from "../vaccine.rdf";
-import { ImmutableContext } from "@ngxs-labs/immer-adapter";
 
 @State<VaccineStateModel>({
   name: "vaccines",
@@ -22,7 +21,6 @@ export class VaccineState {
   }
 
   @Action(LoadVaccine)
-  @ImmutableContext()
   async loadVaccines(
     ctx: StateContext<VaccineStateModel>,
     action: LoadVaccine

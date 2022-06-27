@@ -22,6 +22,9 @@
       "@solid-app-verifiable-credentials/solid": ["libs/solid/src/index.ts"],
       "@solid-app-verifiable-credentials/user-data": [
         "libs/user-data/src/index.ts"
+      ],
+      "@solid-app-verifiable-credentials/verification-stepper": [
+        "libs/verification-stepper/src/index.ts"
       ]
     }
   },

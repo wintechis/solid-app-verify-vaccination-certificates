@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/verification-stepper/src",
+  "prefix": "solid-app-verifiable-credentials",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/verification-stepper"],
+      "options": {
+        "jestConfig": "libs/verification-stepper/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/verification-stepper/**/*.ts",
+          "libs/verification-stepper/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

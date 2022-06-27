@@ -18,7 +18,10 @@
           "apps/solvercred/src/favicon.ico",
           "apps/solvercred/src/assets"
         ],
-        "styles": ["apps/solvercred/src/styles.scss"],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/solvercred/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {

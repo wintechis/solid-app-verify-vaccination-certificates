@@ -8,6 +8,7 @@
     "shop": "apps/shop",
     "solid": "libs/solid",
     "solvercred": "apps/solvercred",
-    "user-data": "libs/user-data"
+    "user-data": "libs/user-data",
+    "verification-stepper": "libs/verification-stepper"
   }
 }

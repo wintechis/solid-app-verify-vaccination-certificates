@@ -1,0 +1,27 @@
+<mat-vertical-stepper linear>
+  <mat-step [completed]="false">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Freigabe der Impfzertifikate</ng-template>
+      <p>
+        Damit wir einen Nachweis über Ihren Impfstatus generieren können,
+        benötigen wir, das RKI, Zugriff auf Ihre Impfzertifikate.
+      </p>
+      <button mat-raised-button color="primary">Zugriff gewähren</button>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Generieren des Proofs</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Phone" formControlName="phoneNumber" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" />
+      </mat-form-field>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Abschluss</ng-template>
+    You are now done.
+  </mat-step>
+</mat-vertical-stepper>

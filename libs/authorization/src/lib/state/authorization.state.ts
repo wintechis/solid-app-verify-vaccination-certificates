@@ -1,8 +1,7 @@
-import { Action, NgxsOnInit, Selector, State, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { AuthorizationStateModel } from "./authorization.state-model";
 import { LoadAccess } from "./authorization.actions";
 import { AuthorizationService } from "../authorization.service";
-import { ImmutableContext, ImmutableSelector } from "@ngxs-labs/immer-adapter";
 import { Injectable } from "@angular/core";
 
 @State<AuthorizationStateModel>({
@@ -14,7 +13,6 @@ export class AuthorizationState {
   constructor(private authorizationService: AuthorizationService) {}
 
   @Selector()
-  @ImmutableSelector()
   static getAgentsWithReadAccess(
     state: AuthorizationStateModel
   ): { webId: string }[] {
@@ -28,7 +26,6 @@ export class AuthorizationState {
   }
 
   @Action(LoadAccess)
-  @ImmutableContext()
   async loadAccess(ctx: StateContext<AuthorizationStateModel>) {
     const agentAccess = await this.authorizationService.getAgentAccessAll();
     if (agentAccess) {
