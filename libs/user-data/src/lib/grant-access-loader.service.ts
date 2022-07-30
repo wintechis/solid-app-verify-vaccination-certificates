@@ -15,9 +15,12 @@ export class GrantAccessLoader
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): { redirectUri: string | null; webId: string | null } {
+    const url = new URL(state.url, location.origin);
+    const redirectUri = url.searchParams.get("redirectUri");
+    const webId = url.searchParams.get("webId");
     return {
-      webId: localStorage.getItem("webId"),
-      redirectUri: localStorage.getItem("redirectUri"),
+      webId: webId,
+      redirectUri: redirectUri,
     };
   }
 }

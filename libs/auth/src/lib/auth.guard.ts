@@ -20,23 +20,27 @@ export class AuthGuard implements CanActivate {
   ): Promise<boolean | UrlTree> {
     const info = await this.sessionService.handleLoginRedirect();
     if (info?.isLoggedIn) {
-      this.removeOICDQueryParams(route);
+      // this needs to be commented out to preserve the parameters passed in by other applications
+      // this in turn leads to a need for a new login on page refresh - This is due to a bug in the inrupt library
+      //      this.removeOICDQueryParams(state);
       return true;
     }
 
     if (this.sessionService.isLoggedIn) return true;
 
-    return this.router.createUrlTree(["/login"]);
+    return this.router.createUrlTree(["/login"], {
+      queryParams: { target: state.url },
+      queryParamsHandling: "merge",
+    });
   }
 
-  private removeOICDQueryParams(activatedRoute: ActivatedRouteSnapshot) {
-    if (
-      activatedRoute.queryParamMap.has("code") ||
-      activatedRoute.queryParamMap.has("state")
-    )
-      this.router.navigate([], {
+  private removeOICDQueryParams(routerStateSnapshot: RouterStateSnapshot) {
+    const url = new URL(routerStateSnapshot.url, location.origin);
+    if (url.searchParams.has("code") || url.searchParams.has("state")) {
+      this.router.navigate([url.pathname], {
         queryParamsHandling: "merge",
         queryParams: { code: null, state: null },
       });
+    }
   }
 }

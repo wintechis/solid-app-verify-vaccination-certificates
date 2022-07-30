@@ -3,8 +3,4 @@
 <p>webid: {{ (queryParamMap$ | async)?.get("webId") }}</p>
 <p>redirectUri: {{ (queryParamMap$ | async)?.get("redirectUri") }}</p>
 
-<solid-app-verifiable-credentials-verification-stepper></solid-app-verifiable-credentials-verification-stepper>
-<button mat-raised-button color="primary" (click)="redirectBack()">
-  Legitimation abschließen
-</button>
 <router-outlet></router-outlet>

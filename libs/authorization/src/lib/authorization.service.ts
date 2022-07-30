@@ -7,19 +7,19 @@ export class AuthorizationService {
 
   public async getAgentAccessAll() {
     return await this.sessionService.getAgentAccessAll(
-      this.getVaccinationThingUrl().toString()
+      (await this.getVaccinationThingUrl()).toString()
     );
   }
 
-  private getVaccinationThingUrl() {
-    const url = this.sessionService.storageRootUrl;
+  private async getVaccinationThingUrl() {
+    const url = await this.sessionService.storageRootUrl;
     url.pathname += "vaccinations";
     return url;
   }
 
   public async setAgentReadAccess(webId: string) {
     return this.sessionService.setAgentAccess(
-      this.getVaccinationThingUrl().toString(),
+      (await this.getVaccinationThingUrl()).toString(),
       webId,
       { read: true }
     );

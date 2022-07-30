@@ -1,21 +1,27 @@
 import { Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
-  Resolve,
+  CanActivate,
   RouterStateSnapshot,
 } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
 })
-export class GrantAccessStorer implements Resolve<boolean> {
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (route.url.toString().includes("requestAccess")) {
-      if (route.queryParams["redirectUri"]) {
-        localStorage.setItem("redirectUri", route.queryParams["redirectUri"]);
+export class GrantAccessStorer implements CanActivate {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    if (state.url.includes("requestAccess")) {
+      const url = new URL(state.url, location.origin);
+      const redirectUri = url.searchParams.get("redirectUri");
+      if (redirectUri) {
+        localStorage.setItem("redirectUri", redirectUri);
       }
-      if (route.queryParams["webId"]) {
-        localStorage.setItem("webId", route.queryParams["webId"]);
+      const webId = url.searchParams.get("webId");
+      if (webId) {
+        localStorage.setItem("webId", webId);
       }
     }
     return true;

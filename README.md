@@ -142,3 +142,5 @@ For the time being, ACLs only support to grant an application full access to the
 visits the Shop authenticated, the Shop could indeed read the original vaccination certificates. ACLs will in future
 allow for partial access to the pod's data. This means, that this approach will be even more secure once this change
 will become active.
+
+Proof muss jedes Mal neu generiert werden, damit man nicht erkennen kann, ob der User schon einen Proof hat

@@ -1,0 +1,13 @@
+<h2>Vaccinations freigeben</h2>
+
+<p>Die webid: {{ webId }} bittet um Zugriff auf Ihre Impfdaten.</p>
+
+<button mat-raised-button (click)="grantAccess()">Abbrechen</button>
+<button
+  mat-raised-button
+  color="primary"
+  (click)="grantAccess()"
+  style="margin-left: 2rem"
+>
+  Freigeben
+</button>

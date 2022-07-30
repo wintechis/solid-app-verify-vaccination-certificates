@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { UserDataService } from "../user-data.service";
-import { Vaccination } from "../vaccination.rdf";
 import { Store } from "@ngxs/store";
 import { Observable } from "rxjs";
 import {
@@ -43,7 +42,7 @@ export class UserDataComponent implements OnInit {
   async saveNewVaccination() {
     this.store.dispatch(
       new AddVaccination(
-        "https://pod.inrupt.com/wiesnery/public/vaccines.ttl#biontech-comirnaty",
+        "https://storage.inrupt.com/eb61cfd6-3b92-4239-9299-af767db50d29/public/vaccines.ttl#biontech-comirnaty",
         Number(this.numberOfVaccination),
         this.dateOfVaccination
       )

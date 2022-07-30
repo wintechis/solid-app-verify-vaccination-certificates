@@ -10,12 +10,15 @@ import { AuthorizationModule } from "@solid-app-verifiable-credentials/authoriza
 import { GrantAccessComponent } from "./grant-access/grant-access.component";
 import { GrantAccessStorer } from "./grant-access-storer.service";
 import { GrantAccessLoader } from "./grant-access-loader.service";
+import { GrantAccessDialogComponent } from "./grant-access/grant-access-dialog/grant-access-dialog.component";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 
 export const userDataRoutes: Route[] = [
   {
     path: "",
     component: UserDataComponent,
-    resolve: { resolve: GrantAccessStorer },
+    canActivate: [GrantAccessStorer],
     children: [
       {
         path: "requestAccess",
@@ -33,7 +36,14 @@ export const userDataRoutes: Route[] = [
     FormsModule,
     NgxsModule.forFeature([VaccinationState, VaccineState]),
     AuthorizationModule,
+    MatButtonModule,
+    MatDialogModule,
   ],
-  declarations: [UserDataComponent, GrantAccessComponent],
+  declarations: [
+    UserDataComponent,
+    GrantAccessComponent,
+    GrantAccessDialogComponent,
+  ],
+  providers: [GrantAccessStorer, GrantAccessLoader],
 })
 export class UserDataModule {}

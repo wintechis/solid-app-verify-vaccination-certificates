@@ -6,7 +6,6 @@ import {
   removeThing,
   setThing,
   Thing,
-  universalAccess,
 } from "@inrupt/solid-client";
 import {
   Vaccination,
@@ -32,7 +31,7 @@ export class UserDataService {
     numberOfVaccination: number,
     dateOfVaccination: string
   ) {
-    const url = this.getVaccinationThingUrl();
+    const url = await this.getVaccinationThingUrl();
 
     let ds = await this.sessionService
       .getDataSet(url.toString())
@@ -54,15 +53,15 @@ export class UserDataService {
     await this.sessionService.saveDataSet(url.toString(), ds);
   }
 
-  private getVaccinationThingUrl() {
-    const url = this.sessionService.storageRootUrl;
+  private async getVaccinationThingUrl() {
+    const url = await this.sessionService.storageRootUrl;
     url.pathname += "vaccinations";
     return url;
   }
 
   async getVaccinationDocuments(): Promise<Map<string, Vaccination>> {
     const solidDataset = await this.sessionService
-      .getDataSet(this.getVaccinationThingUrl().toString())
+      .getDataSet((await this.getVaccinationThingUrl()).toString())
       .catch((reason) => {
         if (reason.response?.status == 404) {
           return createSolidDataset();
@@ -85,7 +84,7 @@ export class UserDataService {
 
   async deleteVaccination(vaccinationUrl: string) {
     let ds = await this.sessionService.getDataSet(
-      this.getVaccinationThingUrl().toString()
+      (await this.getVaccinationThingUrl()).toString()
     );
 
     ds = removeThing(ds, vaccinationUrl);

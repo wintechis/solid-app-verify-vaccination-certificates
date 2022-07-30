@@ -1,6 +1,6 @@
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { AuthorizationStateModel } from "./authorization.state-model";
-import { LoadAccess } from "./authorization.actions";
+import { GrantAccess, LoadAccess } from "./authorization.actions";
 import { AuthorizationService } from "../authorization.service";
 import { Injectable } from "@angular/core";
 
@@ -30,9 +30,18 @@ export class AuthorizationState {
     const agentAccess = await this.authorizationService.getAgentAccessAll();
     if (agentAccess) {
       ctx.setState((state: AuthorizationStateModel) => {
-        state.agentAccess = agentAccess;
-        return state;
+        return { ...state, agentAccess };
       });
     }
+  }
+
+  @Action(GrantAccess)
+  async grantAccess(
+    ctx: StateContext<AuthorizationStateModel>,
+    action: GrantAccess
+  ) {
+    await this.authorizationService.setAgentReadAccess(action.webIdToShare);
+
+    ctx.dispatch(LoadAccess);
   }
 }

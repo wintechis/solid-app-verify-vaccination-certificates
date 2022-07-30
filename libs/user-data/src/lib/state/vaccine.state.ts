@@ -32,8 +32,10 @@ export class VaccineState {
 
     if (vaccine) {
       ctx.setState((state: VaccineStateModel) => {
-        state.vaccines.push({ ...vaccine, url: action.url });
-        return state;
+        return {
+          ...state,
+          vaccines: [...state.vaccines, { ...vaccine, url: action.url }],
+        };
       });
     }
   }

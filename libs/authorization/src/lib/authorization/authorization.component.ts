@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthorizationService } from "../authorization.service";
-import { NgxsOnInit, Store } from "@ngxs/store";
+import { Store } from "@ngxs/store";
 import { Observable } from "rxjs";
 import { AuthorizationState } from "../state/authorization.state";
-import { LoadAccess } from "../state/authorization.actions";
+import { GrantAccess, LoadAccess } from "../state/authorization.actions";
 
 @Component({
   selector: "solid-app-verifiable-credentials-authorization",
@@ -23,9 +23,7 @@ export class AuthorizationComponent implements OnInit {
   }
 
   grantAccess() {
-    this.authorizationService
-      .setAgentReadAccess(this.webIdToShare)
-      .then((r) => console.dir(r));
+    this.store.dispatch(new GrantAccess(this.webIdToShare));
   }
 
   ngOnInit(): void {

@@ -10,6 +10,7 @@ import {
   ThingNotFetchableError,
 } from "./thingIncompleteError";
 import { RDF } from "@inrupt/vocab-common-rdf";
+import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 
 export type Nullable<T> = { [K in keyof T]: T[K] | null };
 
@@ -47,7 +48,9 @@ export class LazyThing<T, P extends ThingDeserializer<T>>
       const parsedUrl = new URL(this.url);
       parsedUrl.hash = "";
 
-      const ds = await getSolidDataset(parsedUrl.href);
+      const ds = await getSolidDataset(parsedUrl.href, {
+        fetch: getDefaultSession().fetch,
+      });
       this.thing = getThing(ds, this.url);
     } catch (e) {
       console.error(e);

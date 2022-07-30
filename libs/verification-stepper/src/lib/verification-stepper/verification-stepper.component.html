@@ -1,17 +1,17 @@
-<mat-vertical-stepper linear>
-  <mat-step [completed]="false" editable="false">
+vaccinationsUri: {{ vaccinationsUri | async }}
+<mat-vertical-stepper linear #stepper [selectedIndex]="selectedStepIndex">
+  <mat-step [completed]="(vaccinationsUri | async) != null" editable="false">
     <ng-template matStepLabel>Freigabe der Impfzertifikate</ng-template>
     <solid-app-verifiable-credentials-request-access-component></solid-app-verifiable-credentials-request-access-component>
   </mat-step>
   <mat-step>
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Generieren des Proofs</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Phone" formControlName="phoneNumber" />
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Email" formControlName="email" />
-      </mat-form-field>
+      <p>
+        Ihre Impfzertifikate unter: {{ vaccinationsUri | async }} sind jetzt für
+        das RKI freigegeben
+      </p>
+      <button mat-raised-button color="primary">Proof generieren</button>
     </form>
   </mat-step>
   <mat-step>

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ISessionInfo, Session } from "@inrupt/solid-client-authn-browser";
 import {
+  getPodUrlAll,
   getSolidDataset,
   saveSolidDatasetAt,
   SolidDataset,
@@ -19,7 +20,6 @@ export class SessionService {
   handleLoginRedirect(): Promise<ISessionInfo | undefined> {
     return this.session.handleIncomingRedirect({
       restorePreviousSession: true,
-      url: window.location.href,
     });
   }
 
@@ -31,17 +31,13 @@ export class SessionService {
     return this._session;
   }
 
-  get storageRootUrl(): URL {
+  get storageRootUrl(): Promise<URL> {
     if (this.session.info.webId == undefined)
       throw new Error("webId is empty - please refresh the page and login");
 
-    const url = new URL(this.session.info.webId);
-    url.hash = "";
-    url.pathname = url.pathname.substring(0, url.pathname.lastIndexOf("/")); // Walk path up
-    url.pathname = url.pathname.substring(0, url.pathname.lastIndexOf("/")); // Walk path up
-    if (!url.pathname.endsWith("/")) url.pathname += "/";
-
-    return url;
+    return getPodUrlAll(this.session.info.webId, {
+      fetch: this.session.fetch,
+    }).then((value) => new URL(value[0]));
   }
 
   getDataSet(url: string): Promise<SolidDataset> {
