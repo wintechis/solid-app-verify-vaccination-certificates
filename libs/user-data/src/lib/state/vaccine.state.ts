@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { LoadVaccine } from "./vaccine.actions";
 import { VaccineModel, VaccineStateModel } from "./vaccine.state-model";
 import { LazyThing } from "@solid-app-verifiable-credentials/solid";
-import { VaccineDeserializer } from "../vaccine.rdf";
+import { VaccineDeserializer } from "../../../../vaccination-data/src/lib/vaccine.rdf";
 
 @State<VaccineStateModel>({
   name: "vaccines",

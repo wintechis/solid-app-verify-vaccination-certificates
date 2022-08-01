@@ -23,6 +23,9 @@
       "@solid-app-verifiable-credentials/user-data": [
         "libs/user-data/src/index.ts"
       ],
+      "@solid-app-verifiable-credentials/vaccination-data": [
+        "libs/vaccination-data/src/index.ts"
+      ],
       "@solid-app-verifiable-credentials/verification-stepper": [
         "libs/verification-stepper/src/index.ts"
       ]

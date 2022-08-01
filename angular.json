@@ -5,10 +5,12 @@
     "auth": "libs/auth",
     "authorization": "libs/authorization",
     "rki": "apps/rki",
+    "rki-proof-generation": "apps/rki-proof-generation",
     "shop": "apps/shop",
     "solid": "libs/solid",
     "solvercred": "apps/solvercred",
     "user-data": "libs/user-data",
+    "vaccination-data": "libs/vaccination-data",
     "verification-stepper": "libs/verification-stepper"
   }
 }

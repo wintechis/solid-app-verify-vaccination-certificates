@@ -1,0 +1,49 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/rki-proof-generation/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/rki-proof-generation",
+        "main": "apps/rki-proof-generation/src/main.ts",
+        "tsConfig": "apps/rki-proof-generation/tsconfig.app.json",
+        "assets": ["apps/rki-proof-generation/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/rki-proof-generation/src/environments/environment.ts",
+              "with": "apps/rki-proof-generation/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "rki-proof-generation:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "rki-proof-generation:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/rki-proof-generation/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

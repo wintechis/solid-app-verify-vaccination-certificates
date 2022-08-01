@@ -12,7 +12,7 @@ export class RequestAccessComponentComponent implements OnInit {
 
   requestAccess() {
     const webId = encodeURIComponent(
-      "https://wiesnery.solidcommunity.net/profile/card#me"
+      "https://pod.inrupt.com/robertkochinst/profile/card#me"
     );
     const redirectUri = encodeURIComponent(location.href);
     window.location.href = `http://localhost:4200/requestAccess?webId=${webId}&redirectUri=${redirectUri}`;

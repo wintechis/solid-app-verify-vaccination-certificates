@@ -3,12 +3,7 @@ import {
   ThingDeserializer,
   ThingSerializer,
 } from "@solid-app-verifiable-credentials/solid";
-import {
-  buildThing,
-  createThing,
-  getStringNoLocale,
-  Thing,
-} from "@inrupt/solid-client";
+import { buildThing, getStringNoLocale, Thing } from "@inrupt/solid-client";
 import { RDF } from "@inrupt/vocab-common-rdf";
 
 export interface Vaccine {

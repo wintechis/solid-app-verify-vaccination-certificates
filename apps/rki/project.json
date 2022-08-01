@@ -65,7 +65,8 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "port": 4201
+        "port": 4201,
+        "proxyConfig": "apps/rki/proxy.conf.json"
       }
     },
     "extract-i18n": {

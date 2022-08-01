@@ -8,13 +8,13 @@ import {
   Thing,
 } from "@inrupt/solid-client";
 import {
+  PersonDeserializer,
   Vaccination,
   VaccinationDeserializer,
   VaccinationSerializer,
-} from "./vaccination.rdf";
+  VaccineDeserializer,
+} from "@solid-app-verifiable-credentials/vaccination-data";
 import { LazyThing } from "@solid-app-verifiable-credentials/solid";
-import { PersonDeserializer } from "./person.rdf";
-import { VaccineDeserializer } from "./vaccine.rdf";
 
 @Injectable({
   providedIn: "root",
@@ -71,12 +71,12 @@ export class UserDataService {
 
     const things: Thing[] = getThingAll(solidDataset);
 
-    const serializer = new VaccinationDeserializer();
+    const deserializer = new VaccinationDeserializer();
 
     return things
-      .filter((thing) => serializer.checkType(thing))
+      .filter((thing) => deserializer.checkType(thing))
       .reduce((map, thing) => {
-        const vaccination = serializer.deserialize(thing);
+        const vaccination = deserializer.deserialize(thing);
         map.set(thing.url, vaccination);
         return map;
       }, new Map<string, Vaccination>());

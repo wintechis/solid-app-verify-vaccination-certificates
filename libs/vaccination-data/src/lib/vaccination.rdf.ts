@@ -1,11 +1,8 @@
 import {
   buildThing,
-  createThing,
   getDate,
   getInteger,
   getIri,
-  getStringNoLocale,
-  getUrl,
   Thing,
 } from "@inrupt/solid-client";
 
