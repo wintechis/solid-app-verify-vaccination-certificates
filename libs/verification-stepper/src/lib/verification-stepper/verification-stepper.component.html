@@ -4,18 +4,27 @@ vaccinationsUri: {{ vaccinationsUri | async }}
     <ng-template matStepLabel>Freigabe der Impfzertifikate</ng-template>
     <solid-app-verifiable-credentials-request-access-component></solid-app-verifiable-credentials-request-access-component>
   </mat-step>
-  <mat-step>
+  <mat-step [completed]="proofUri != null">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Generieren des Proofs</ng-template>
       <p>
         Ihre Impfzertifikate unter: {{ vaccinationsUri | async }} sind jetzt für
         das RKI freigegeben
       </p>
-      <button mat-raised-button color="primary">Proof generieren</button>
+      <button mat-raised-button color="primary" (click)="generateProof()">
+        Proof generieren
+      </button>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Abschluss</ng-template>
-    You are now done.
+    <p>
+      Ihr Proof wurde generiert und kann unter {{ proofUri }} abgerufen werden.
+      <br />
+      Sie werden nun zum Shop zurückgeleitet.
+    </p>
+    <button mat-raised-button color="primary" (click)="redirectToShop()">
+      Zum Shop
+    </button>
   </mat-step>
 </mat-vertical-stepper>

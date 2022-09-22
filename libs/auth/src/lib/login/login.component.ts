@@ -8,7 +8,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  idpURL = "https://login.inrupt.com";
+  idpURL = "https://solidcommunity.net";
 
   constructor(
     private loginService: LoginService,

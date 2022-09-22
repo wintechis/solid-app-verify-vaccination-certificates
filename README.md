@@ -18,10 +18,6 @@ owning user.
 This app is a Solid Application for the Hot Topics Seminar at the Chair of Technical Information Systems at FAU
 Erlangen-Nuremberg and is supervised by Daniel Schraudner.
 
-### SOLID
-
-- TODO
-
 ## Mission
 
 After looking at SOLID, we wanted to build a demo application that uses SOLID's core strengths most closely to its
@@ -53,6 +49,26 @@ development efficiency.
 - Implement a third party authority to derive verifiable, aggregated data (e.g. Vaccination status based on vaccination
   certificates, adult age proof based on birthdate)
 - Adding a third view for the third party authority
+
+### How to start the apps
+
+Install the dependencie.
+
+```bash
+npm install
+```
+
+Start all the frontends and the backend each in a separate terminal:
+
+```bash
+nx run rki:serve
+nx run shop:serve
+nx run solvercred:serve
+nx run rki-proof-generation:serve
+```
+
+Open the browser to http://localhost:4200 to manage your vaccination certificates.
+Open the browser to http://localhost:4202 to access the shop and run through the verification process.
 
 ### Demarcation
 

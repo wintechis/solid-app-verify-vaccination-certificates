@@ -1,8 +1,10 @@
-import { Component, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, ViewChild } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { map, Observable } from "rxjs";
+import { BehaviorSubject, map, Observable } from "rxjs";
 import { MatStepper } from "@angular/material/stepper";
+import { ProofGeneratorService } from "./proof-generator.service";
+import { SessionService } from "@solid-app-verifiable-credentials/auth";
 
 @Component({
   selector: "solid-app-verifiable-credentials-verification-stepper",
@@ -18,8 +20,12 @@ export class VerificationStepperComponent {
   vaccinationsUri: Observable<string | null> = this.activatedRoute.data.pipe(
     map((data) => data["vaccinationsUri"])
   );
+  proofUri: string | null = null;
 
   get selectedStepIndex(): number {
+    if (this.proofUri != null) {
+      return 2;
+    }
     if (this.activatedRoute.snapshot.data["vaccinationsUri"] != null) {
       return 1;
     }
@@ -28,6 +34,26 @@ export class VerificationStepperComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private proofGenerator: ProofGeneratorService,
+    private sessionService: SessionService,
+    private cdr: ChangeDetectorRef
   ) {}
+
+  async generateProof() {
+    this.proofUri = await this.proofGenerator.generateProof(
+      this.activatedRoute.snapshot.data["vaccinationsUri"],
+      "https://wiesnery.solidcommunity.net/profile/card#me" // TODO: remove hard coded value
+    );
+    setTimeout(() => {
+      this.stepper.next();
+    }, 1);
+  }
+
+  redirectToShop() {
+    const queryParamMap = this.activatedRoute.snapshot.queryParamMap;
+    const redirectUri = queryParamMap.get("redirectUri");
+    window.location.href =
+      redirectUri + "?proofUri=" + encodeURIComponent(this.proofUri!);
+  }
 }

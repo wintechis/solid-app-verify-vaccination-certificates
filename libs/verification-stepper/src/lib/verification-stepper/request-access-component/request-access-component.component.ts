@@ -11,9 +11,7 @@ export class RequestAccessComponentComponent implements OnInit {
   ngOnInit(): void {}
 
   requestAccess() {
-    const webId = encodeURIComponent(
-      "https://pod.inrupt.com/robertkochinst/profile/card#me"
-    );
+    const webId = encodeURIComponent("https://id.inrupt.com/robertkochinst");
     const redirectUri = encodeURIComponent(location.href);
     window.location.href = `http://localhost:4200/requestAccess?webId=${webId}&redirectUri=${redirectUri}`;
   }

@@ -3,4 +3,5 @@
   Legitimation starten
 </button>
 <p *ngIf="(proofUri | async) != null">proofUri: {{ proofUri | async }}</p>
+<h2 *ngIf="proofValid">Willkommen im Shop! Ihr Impfzertifikat ist valide</h2>
 <router-outlet></router-outlet>
