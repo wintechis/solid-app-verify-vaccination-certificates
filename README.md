@@ -1,4 +1,4 @@
-# Solid App: Verifiable-Credentials
+# Solid App: Verify Vaccination Certificates
 
 The goal of the app is to provide documents while maintaining a maximum of security while only providing the minimum
 required information.
